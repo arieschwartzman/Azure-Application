@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "fhirServiceName": {
+      "type": "string"
+    },
+    "sqlAdminPassword": {
+      "type": "securestring"
+    },
+    "location": {
+      "type": "string"
+    },
+    "serviceName": {
+      "type": "string"
+    },
+    "accountId": {
+      "type":"string",
+      "defaultValue": "ariesch@microsoft.com"
+    },
+    "functionalTestsFileUrl": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/microsoft/ClinicalTrialsBlueprint/master/functional-tests/dynmic_ctm_test.json"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-06-01",
+      "name": "pid-882edde0-c63b-5d8d-9d65-0f476599f6f1",
+      "properties": {
+        "mode": "Incremental",
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "resources": []
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "fhirLinkedTemplate",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/microsoft/fhir-server/master/samples/templates/default-azuredeploy-docker-sql.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "serviceName": { "value": "[parameters('fhirServiceName')]" },
+          "sqlAdminPassword": { "value": "[parameters('sqlAdminPassword')]" }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "logicAppLinkedTemplate",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/microsoft/ClinicalTrialsBlueprint/master/arm-templates/azuredeploy-logicapps.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "serviceName": { "value": "[parameters('serviceName')]" },
+          "accountId": { "value": "[parameters('accountId')]" },
+          "functionalTestsFileUrl": { "value": "[parameters('functionalTestsFileUrl')]" }
+        }
+      }
+    }
+  ]
+}

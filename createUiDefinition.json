@@ -1,0 +1,91 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "basics": [
+            {}
+        ],
+        "steps": [
+            {
+                "name": "fhirConfig",
+                "label": "FHIR Server Configuration",
+                "subLabel": {
+                    "preValidation": "Configure the FHIR Service settings",
+                    "postValidation": "Done"
+                },
+                "bladeTitle": "FHIR Server Configuration",
+                "elements": [
+                    {
+                        "name": "fhirServiceName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "FHIR Service Name",
+                        "toolTip": "FHIR Service Name",
+                        "placeholder": "",
+                        "constraints": {
+                            "required": true,
+                            "validations": [
+                                {
+                                    "regex": "^[a-z0-9A-Z]{3,24}$",
+                                    "message": "Only alphanumeric characters are allowed, and the value must be 3-24 characters long."
+                                }
+                            ]
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "sqlAdminPassword",
+                        "type": "Microsoft.Common.PasswordBox",
+                        "label": {
+                            "password": "SQL Admin Password",
+                            "confirmPassword": "Confirm password"
+                        },
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-zA-Z0-9^!$@#%&*]{8,}$",
+                            "validationMessage": "Password must be at least 8 characters long, contain only numbers letters and special chars"
+                        },
+                        "options": {
+                            "hideConfirmation": false
+                        },
+                        "visible": true
+                    }
+                ]
+            },
+            {
+                "name": "ctmConfig",
+                "label": "Clinical Trials Matching",
+                "subLabel": {
+                    "preValidation": "Configure the FHIR Service settings",
+                    "postValidation": "Done"
+                },
+                "bladeSubtitle": "Clinical Trials Matching",
+                "elements": [
+                    {
+                        "name": "serviceName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "CTM Service Name",
+                        "toolTip": "CTM Service Name",
+                        "placeholder": "",
+                        "constraints": {
+                            "required": true,
+                            "validations": [
+                                {
+                                    "regex": "^[a-z0-9A-Z]{3,17}$",
+                                    "message": "Only alphanumeric characters are allowed, and the value must be 3-24 characters long."
+                                }
+                            ]
+                        },
+                        "visible": true
+                    }
+                ]
+            }
+        ],
+        "outputs": {
+            "fhirServiceName": "[steps('fhirConfig').fhirServiceName]",
+            "sqlAdminPassword": "[steps('fhirConfig').sqlAdminPassword]",
+            "location": "[location()]",
+            "serviceName": "[steps('ctmConfig').serviceName]"
+        }
+    }
+}
