@@ -77,6 +77,23 @@
                             ]
                         },
                         "visible": true
+                    },
+                    {
+                        "name": "acrPassword",
+                        "type": "Microsoft.Common.PasswordBox",
+                        "label": {
+                            "password": "Azure Container Registry Password",
+                            "confirmPassword": "Confirm password"
+                        },
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-zA-Z0-9^!$@#%&*]{8,}$",
+                            "validationMessage": "Password must be at least 8 characters long, contain only numbers letters and special chars"
+                        },
+                        "options": {
+                            "hideConfirmation": true
+                        },
+                        "visible": true
                     }
                 ]
             }
@@ -85,7 +102,9 @@
             "fhirServiceName": "[steps('fhirConfig').fhirServiceName]",
             "sqlAdminPassword": "[steps('fhirConfig').sqlAdminPassword]",
             "location": "[location()]",
-            "serviceName": "[steps('ctmConfig').serviceName]"
+            "serviceName": "[steps('ctmConfig').serviceName]",
+            "acrPassword": "[step('ctmConfig').acrPassword]",
+            "postgreSqladministratorLoginPassword": "[steps('fhirConfig').fhirServiceName]"            
         }
     }
 }

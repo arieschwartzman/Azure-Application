@@ -21,6 +21,16 @@
     "functionalTestsFileUrl": {
       "type": "string",
       "defaultValue": "https://raw.githubusercontent.com/microsoft/ClinicalTrialsBlueprint/master/functional-tests/dynmic_ctm_test.json"
+    },
+    "acrPassword": {
+      "type": "securestring"
+    },
+    "postgreSqlAdministratorLogin": {
+      "type": "string",
+      "defaultValue": "postgreSQLAdminUser"
+    },
+    "postgreSqladministratorLoginPassword": {
+      "type": "securestring"
     }
   },
   "resources": [
@@ -67,6 +77,24 @@
           "serviceName": { "value": "[parameters('serviceName')]" },
           "accountId": { "value": "[parameters('accountId')]" },
           "functionalTestsFileUrl": { "value": "[parameters('functionalTestsFileUrl')]" }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "matchingServiceLinkedTemplate",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/microsoft/ClinicalTrialsBlueprint/master/arm-templates/azuredeploy-ctm.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "serviceName": { "value": "[parameters('serviceName')]" },
+          "acrPassword": { "value": "[parameters('acrPassword')]" },
+          "postgreSqlAdministratorLogin":{ "value": "[parameters('postgreSqlAdministratorLogin')]" },
+          "postgreSqladministratorLoginPassword": {"value": "[parameters('postgreSqladministratorLoginPassword')]"}
         }
       }
     }
