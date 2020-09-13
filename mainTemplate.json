@@ -15,7 +15,7 @@
       "type": "string"
     },
     "accountId": {
-      "type":"string",
+      "type": "string",
       "defaultValue": "ariesch@microsoft.com"
     },
     "functionalTestsFileUrl": {
@@ -31,6 +31,70 @@
     },
     "postgreSqladministratorLoginPassword": {
       "type": "securestring"
+    },
+    "env": {
+      "type": "string",
+      "defaultValue": "prod_us"
+    },
+    "acrServer": {
+      "type": "string",
+      "defaultValue": "ctmprod.azurecr.io"
+    },
+    "acrUsername": {
+      "type": "string",
+      "defaultValue": "ctmprodreader"
+    },
+    "structuringImageTag": {
+      "type": "string",
+      "defaultValue": "2020.0528.1"
+    },
+    "queryEngineImageTag": {
+      "type": "string",
+      "defaultValue": "2020.0528.1"
+    },
+    "disqualifierImageTag": {
+      "type": "string",
+      "defaultValue": "2020.0528.1"
+    },
+    "conParserImageTag": {
+      "type": "string",
+      "defaultValue": "2020.0531.5"
+    },
+    "ta4hImageTag": {
+      "type": "string",
+      "defaultValue": "2020.0510.1"
+    },
+    "gatewayImageTag": {
+      "type": "string",
+      "defaultValue": "2020.0510.1"
+    },
+    "funcTestsImageTag": {
+      "type": "string",
+      "defaultValue": "2020.0625.3"
+    },
+    "queryCountry": {
+      "type": "string",
+      "defaultValue": "us"
+    },
+    "queryPhases": {
+      "type": "string",
+      "defaultValue": "phase_1;phase_2;phase_3;phase_4;not_applicable"
+    },
+    "queryRecruitment": {
+      "type": "string",
+      "defaultValue": "recruiting"
+    },
+    "querySponsors": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "queryConditions": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "isSecondary": {
+      "type": "bool",
+      "defaultValue": false
     }
   },
   "resources": [
@@ -93,9 +157,25 @@
         "parameters": {
           "serviceName": { "value": "[parameters('serviceName')]" },
           "acrPassword": { "value": "[parameters('acrPassword')]" },
-          "postgreSqlAdministratorLogin":{ "value": "[parameters('postgreSqlAdministratorLogin')]" },
-          "postgreSqladministratorLoginPassword": {"value": "[parameters('postgreSqladministratorLoginPassword')]"}
-        }
+          "postgreSqlAdministratorLogin": { "value": "[parameters('postgreSqlAdministratorLogin')]" },
+          "postgreSqladministratorLoginPassword": { "value": "[parameters('postgreSqladministratorLoginPassword')]" },
+          "env": { "value": "[parameters('env')]" },
+          "acrServer": { "value": "[parameters('acrServer')]" },
+          "acrUsername": { "value": "[parameters('acrUsername')]" },
+          "structuringImageTag": { "value": "[parameters('structuringImageTag')]" },
+          "queryEngineImageTag": { "value": "[parameters('queryEngineImageTag')]" },
+          "disqualifierImageTag": { "value": "[parameters('disqualifierImageTag')]" },
+          "conParserImageTag": { "value": "[parameters('conParserImageTag')]" },
+          "ta4hImageTag": { "value": "[parameters('ta4hImageTag')]" },
+          "gatewayImageTag": { "value": "[parameters('gatewayImageTag')]" },
+          "funcTestsImageTag": { "value": "[parameters('funcTestsImageTag')]" },
+          "queryCountry": { "value": "[parameters('queryCountry')]" },
+          "queryPhases": { "value": "[parameters('queryPhases')]" },
+          "queryRecruitment": { "value": "[parameters('queryRecruitment')]" },
+          "querySponsors": { "value": "[parameters('querySponsors')]" },
+          "queryConditions": { "value": "[parameters('queryConditions')]" },
+          "isSecondary": { "value": "[parameters('isSecondary')]" }
+        }      
       }
     }
   ]

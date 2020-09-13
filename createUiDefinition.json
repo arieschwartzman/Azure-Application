@@ -86,9 +86,7 @@
                             "confirmPassword": "Confirm password"
                         },
                         "constraints": {
-                            "required": true,
-                            "regex": "^[a-zA-Z0-9^!$@#%&*]{8,}$",
-                            "validationMessage": "Password must be at least 8 characters long, contain only numbers letters and special chars"
+                            "required": true
                         },
                         "options": {
                             "hideConfirmation": true
@@ -103,7 +101,7 @@
             "sqlAdminPassword": "[steps('fhirConfig').sqlAdminPassword]",
             "location": "[location()]",
             "serviceName": "[steps('ctmConfig').serviceName]",
-            "acrPassword": "[step('ctmConfig').acrPassword]",
+            "acrPassword": "[steps('ctmConfig').acrPassword]",
             "postgreSqladministratorLoginPassword": "[steps('fhirConfig').fhirServiceName]"            
         }
     }
