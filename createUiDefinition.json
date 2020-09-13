@@ -102,7 +102,7 @@
             "location": "[location()]",
             "serviceName": "[steps('ctmConfig').serviceName]",
             "acrPassword": "[steps('ctmConfig').acrPassword]",
-            "postgreSqladministratorLoginPassword": "[steps('fhirConfig').fhirServiceName]"            
+            "postgreSqladministratorLoginPassword": "[steps('fhirConfig').sqlAdminPassword]"            
         }
     }
 }
