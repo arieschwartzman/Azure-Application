@@ -148,6 +148,10 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
       "name": "matchingServiceLinkedTemplate",
+       "dependsOn": [
+        "logicAppLinkedTemplate",
+        "fhirLinkedTemplate"        
+      ],
       "properties": {        
         "mode": "Incremental",
         "templateLink": {
