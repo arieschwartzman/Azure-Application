@@ -74,6 +74,14 @@
                             "hideConfirmation": true
                         },
                         "visible": true
+                    },
+                    {
+                        "name": "withSecondary",
+                        "type": "Microsoft.Common.CheckBox",
+                        "label": "Provision Secondary Resources",
+                        "constraints": {
+                            "required": false                            
+                        }
                     }
                 ]
             }
@@ -82,7 +90,8 @@
             "serviceName": "[basics('serviceName')]",
             "sqlAdminPassword": "[steps('fhirConfig').sqlAdminPassword]",
             "postgreSqladministratorLoginPassword": "[steps('fhirConfig').sqlAdminPassword]",            
-            "acrPassword": "[steps('ctmConfig').acrPassword]"
+            "acrPassword": "[steps('ctmConfig').acrPassword]",
+            "withSecondary": "[steps('ctmConfig').withSecondary]"
         }
     }
 }

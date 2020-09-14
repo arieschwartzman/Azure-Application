@@ -86,7 +86,7 @@
       "type": "string",
       "defaultValue": ""
     },
-    "isSecondary": {
+    "withSecondary": {
       "type": "bool",
       "defaultValue": false
     }
@@ -172,7 +172,46 @@
           "queryRecruitment": { "value": "[parameters('queryRecruitment')]" },
           "querySponsors": { "value": "[parameters('querySponsors')]" },
           "queryConditions": { "value": "[parameters('queryConditions')]" },
-          "isSecondary": { "value": "[parameters('isSecondary')]" }
+          "isSecondary": { "value": false }
+        }      
+      }
+    },
+    {
+      "condition": "[parameters('withSecondary')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "matchingServiceLinkedTemplate",
+      "dependsOn": [
+        "logicAppLinkedTemplate",
+        "fhirLinkedTemplate"        
+      ],
+      "properties": {        
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/microsoft/ClinicalTrialsBlueprint/master/arm-templates/azuredeploy-ctm.json",
+          "contentVersion": "1.0.0.0"
+        },        
+        "parameters": {
+          "serviceName": { "value": "[parameters('serviceName')]" },
+          "acrPassword": { "value": "[parameters('acrPassword')]" },
+          "postgreSqlAdministratorLogin": { "value": "[parameters('postgreSqlAdministratorLogin')]" },
+          "postgreSqladministratorLoginPassword": { "value": "[parameters('postgreSqladministratorLoginPassword')]" },
+          "env": { "value": "[parameters('env')]" },
+          "acrServer": { "value": "[parameters('acrServer')]" },
+          "acrUsername": { "value": "[parameters('acrUsername')]" },
+          "structuringImageTag": { "value": "[parameters('structuringImageTag')]" },
+          "queryEngineImageTag": { "value": "[parameters('queryEngineImageTag')]" },
+          "disqualifierImageTag": { "value": "[parameters('disqualifierImageTag')]" },
+          "conParserImageTag": { "value": "[parameters('conParserImageTag')]" },
+          "ta4hImageTag": { "value": "[parameters('ta4hImageTag')]" },
+          "gatewayImageTag": { "value": "[parameters('gatewayImageTag')]" },
+          "funcTestsImageTag": { "value": "[parameters('funcTestsImageTag')]" },
+          "queryCountry": { "value": "[parameters('queryCountry')]" },
+          "queryPhases": { "value": "[parameters('queryPhases')]" },
+          "queryRecruitment": { "value": "[parameters('queryRecruitment')]" },
+          "querySponsors": { "value": "[parameters('querySponsors')]" },
+          "queryConditions": { "value": "[parameters('queryConditions')]" },
+          "isSecondary": { "value": true }
         }      
       }
     }
