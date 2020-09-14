@@ -116,7 +116,7 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "serviceName": { "value": "[parameters('serviceName')]" },
+          "serviceName": { "value": "[concat(parameters('serviceName'), '-fhir')]" },
           "sqlAdminPassword": { "value": "[parameters('sqlAdminPassword')]" }
         }
       }
